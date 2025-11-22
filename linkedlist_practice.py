@@ -164,6 +164,44 @@ class LinkedList:
             
         return slow
     
+    def remove_duplicates(self):
+        current = self.head
+        
+        while current:
+            runner = current
+            while runner.next:
+                if current.value == runner.next.value:
+                    runner.next = runner.next.next
+                    self.length -=1
+                else:
+                    runner = runner.next
+            current = current.next
+            
+    def remove_duplicates_set(self):
+        values = set()
+        previous = None
+        current = self.head
+        while current:
+            if current.value in values:
+                previous.next = current.next
+                self.length -= 1
+            
+            else:
+                values.add(current.value)
+                previous = current
+            current = current.next
+    
+    def binary_to_decimal(self):
+        current = self.head
+        decimal = 0
+        while current:
+            decimal = decimal * 2+ current.value
+            
+            current = current.next
+            
+        return decimal            
+        
+    
 my_linked_list = LinkedList(4)
 my_linked_list.append(5)
 my_linked_list.pop()
