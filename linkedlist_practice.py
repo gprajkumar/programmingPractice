@@ -199,7 +199,66 @@ class LinkedList:
             
             current = current.next
             
-        return decimal            
+        return decimal       
+    def partition_list(self,value):
+        dummy1 = Node(0)
+        dummy2 = Node(0)
+        prev1 = dummy1
+        prev2 = dummy2
+        
+        temp = self.head
+        while temp:
+            if temp.value < value:
+                prev1.next = temp
+                prev1 = temp
+                
+            else:
+                prev2.next = temp
+                prev2 = temp
+            temp = temp.next
+        
+        prev1.next = dummy2.next
+        prev2.next = None
+        self.head = dummy1.next     
+    
+    def reverse_between(self,start_index,end_index):
+        
+        
+        if self.length == 0 or self.length == 1:
+            return None
+        dummy_node = Node(0)
+        dummy_node.next = self.head
+        previous_node = dummy_node
+        
+        for i in range(start_index):
+            previous_node = previous_node.next
+        
+        current_node = previous_node.next
+        
+        for i in range(end_index - start_index):
+            node_to_move = current_node.next
+            current_node.next = node_to_move.next
+            node_to_move.next = previous_node.next
+            previous_node.next = node_to_move
+            
+        self.head = dummy_node.next
+    
+def swap_pairs(self):
+    dummy = Node(0)
+    dummy.next = self.head
+    previous = dummy
+    first = self.head
+    
+    while first and first.next:
+        second = first.next
+        previous.next = second
+        first.next = second.next
+        second.next = first
+        
+        previous = first
+        first = first.next
+        
+    self.head = dummy.next
         
     
 my_linked_list = LinkedList(4)
